@@ -1,25 +1,35 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const [user, setUser] = useState({ name: "", email: "", age: "" });
+
+  // handle change event of the input
+  const handleChange = e => {
+    e.persist();
+    setUser(prevUser => ({ ...prevUser, [e.target.name]: e.target.value }));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h3>useState with object in React Hooks </h3>
+      <br />
+      <label>Name:</label>
+      <input type="text" name="name" value={user.name} onChange={handleChange} />
+      <br /><br />
+      <label>Email:</label>
+      <input type="text" name="email" value={user.email} onChange={handleChange} />
+      <br /><br />
+      <label>Age:</label>
+      <input type="text" name="age" value={user.age} onChange={handleChange} />
+      <br /><br />
+      <label>Output:</label>
+      <pre>{JSON.stringify(user, null, 2)}</pre>
     </div>
   );
+
 }
 
 export default App;
